@@ -2,7 +2,9 @@ import React from 'react';
 import {View,Text,Image,ActivityIndicator, StyleSheet,Dimensions} from 'react-native'
 import {StatusBar} from 'expo-status-bar'
 import { AntDesign } from '@expo/vector-icons';
-import {addToCart} from '../Services/Cart'
+import {subscribe} from '../Services/Order'
+
+import moment from 'moment'
 
 
 const {width,height} = Dimensions.get("window")
@@ -11,7 +13,7 @@ const {width,height} = Dimensions.get("window")
 import { Entypo } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-class ProductPage extends React.Component {
+class Subscribe extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -25,6 +27,11 @@ class ProductPage extends React.Component {
         this.setState({
             detail : this.props.route.params.order.item,
             quantity : this.props.route.params.order.quantity,
+            subscriptionType: this.props.route.params.order.subscriptionType2,
+            startTime : this.props.route.params.order.startTime,
+            endTime : this.props.route.params.order.endTime,
+            timing : this.props.route.params.order.timing,
+            subscription : this.props.route.params.order.subscription,
         })
     }
 
@@ -38,17 +45,20 @@ class ProductPage extends React.Component {
                         }))
         }
     }
-    handleCart = async () => {
+    handleSubscribe = async () => {
         console.log(0)
         var obj={};
         console.log("This is the id, ",this.state.detail.id)
         obj.id = this.state.detail.id
         obj.quantity = this.state.quantity
         obj.price = this.state.detail.price*this.state.quantity
-
-        await addToCart(obj).then(response => {
+        obj.subscription = this.state.subscription
+        obj.startTime = this.state.startTime
+        obj.endTime = this.state.endTime
+        obj.timing = this.state.timing
+        console.log(obj.subscription)
+        await subscribe(obj).then(response => {
             console.log(response)
-            this.props.navigation.replace("MyTabs",{screen:"CartStack"})
         })
     }
     render() {
@@ -70,20 +80,32 @@ class ProductPage extends React.Component {
                         </View>
 
                 <View style={styles.description}>
-                    <Text style={{fontFamily:"Raleway_bold"}}>Order Detail</Text>
+                    <Text style={{fontFamily:"Raleway_bold"}}>Subscription Detail</Text>
                     <View>
                         <View style={{flexDirection:"row",justifyContent:"space-between"}}>
                             <Text>Quantity:</Text>
                             <Text>{this.state.quantity}</Text>
                         </View>
                         <View style={{flexDirection:"row",justifyContent:"space-between"}}>
-                            <Text>Quantity:</Text>
-                            <Text>{this.state.quantity}</Text>
+                            <Text>Timing:</Text>
+                            <Text>{this.state.timing}</Text>
                         </View>
                         <View style={{flexDirection:"row",justifyContent:"space-between"}}>
-                            <Text>Quantity:</Text>
-                            <Text>{this.state.quantity}</Text>
+                            <Text>Start Time:</Text>
+                            <Text>{moment(this.state.startTime).format('LL')}</Text>
                         </View>
+                        <View style={{flexDirection:"row",justifyContent:"space-between"}}>
+                            <Text>End Time:</Text>
+                            <Text>{moment(this.state.endTime).format('LL')}</Text>
+                        </View>
+                        {this.state.detail.can_subscribe &&
+                        <>
+                            <View style={{flexDirection:"row",justifyContent:"space-between"}}>
+                                <Text>Subscription Name:</Text>
+                                <Text>{this.state.subscriptionType.name}</Text>
+                            </View>
+                        </>
+                        }
                         <View style={{flexDirection:"row",justifyContent:"space-between",alignItems:"center"}}>
                             <Text>Quantity:</Text>
                             <View style={styles.counter}>
@@ -100,23 +122,23 @@ class ProductPage extends React.Component {
                         <View style={styles.pricing}>
                             <Text style={{fontFamily:"Raleway_bold"}}>Price:</Text>
                             <View style={styles.price}>
-                                <Text style={{color:"white",fontFamily:"Raleway"}}>Rs.{this.state.detail.price*this.state.quantity}</Text>
+                                <Text style={{color:"white",fontFamily:"Raleway"}}>Rs.{this.state.detail.price*this.state.quantity} per day</Text>
                             </View>
                         </View>
 
                     </View>
                 </View>{/*<Text>END OF DESCRIPTION</Text>*/}
                 
-                <TouchableOpacity style={styles.cart} onPress={() => this.handleCart()}>
-                    <Text style={{color:"white",fontFamily:"Raleway_bold",fontSize:24}}>Add to Cart   </Text>
-                        <Entypo name="shopping-cart" size={22} color="white" />
+                <TouchableOpacity style={styles.cart} onPress={() => this.handleSubscribe()}>
+                    <Text style={{color:"white",fontFamily:"Raleway_bold",fontSize:24}}>Subscribe   </Text>
+                        <Entypo name="subscribe" size={22} color="white" />
                 </TouchableOpacity>
                 
             </View>
         )
     }
 }
-export default ProductPage;
+export default Subscribe;
 
 const styles= StyleSheet.create({
     container: {
@@ -179,7 +201,7 @@ const styles= StyleSheet.create({
     price : {
         backgroundColor : "#e94e87",
         borderRadius: width/2,
-        width : "40%",
+        width : "60%",
         justifyContent : "center",
         alignItems : "center",
         marginLeft:10,

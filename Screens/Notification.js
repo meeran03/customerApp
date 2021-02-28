@@ -9,7 +9,6 @@ const {width,height} = Dimensions.get("window")
 
 export default function Notification(props) {
     const [notifications, setNotifications] = useState([]);
-    let [isAdmin,setIsAdmin] = React.useState(false)
 
     useEffect(() => {
         (async () => {

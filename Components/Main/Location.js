@@ -10,7 +10,7 @@ function Location(props) {
             <View style={{flexDirection:"row",alignItems:"center",justifyContent:"space-between"}}>
                 <Text style={{color:"grey",fontFamily:"Raleway",width:'70%'}}>35-C Judicial Colony,Lahore</Text>
                 <TouchableOpacity style={{flexDirection:"row"}} 
-                    onPress={() => props.navigation.navigate("Change Location")}
+                    onPress={() => props.navigation.navigate("ProfileStack",{screen:"Change Location"})}
                 >
                     <Text style={{color:"grey",fontFamily:"Raleway",marginHorizontal:10}}>Change    
                     </Text>

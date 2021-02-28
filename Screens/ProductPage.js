@@ -42,6 +42,14 @@ class ProductPage extends React.Component {
                         }))
         }
     }
+
+    handleOrder = () => {
+        let data = {}
+        data.quantity = this.state.quantity,
+        data.item = this.state.detail
+        this.props.navigation.navigate("Order Detail",{order : data})
+    }
+
     render() {
         if (this.state.loading) {
             return(
@@ -89,7 +97,7 @@ class ProductPage extends React.Component {
                 {this.state.detail.can_subscribe==true ? <Subscription navigation={this.props.navigation} state={this.state}/> : null}
 
                 <View style={styles.add}>
-                    <TouchableOpacity  onPress={() => this.quantityHandler('+')}>
+                    <TouchableOpacity  onPress={() => this.handleOrder()}>
                         <AntDesign name="plus" size={30} color="white" />
                     </TouchableOpacity>
                 </View>

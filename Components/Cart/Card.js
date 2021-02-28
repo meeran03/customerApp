@@ -31,7 +31,7 @@ export default class Card extends Component {
     handleDelete = async() => {
         await deleteCartItem(this.props.index).then(() => {
             Alert.alert("Delete Successful","The item was deleted Successfully")
-            this.props.navigation.navigate("Home")
+            this.props.navigation.replace("MyTabs",{screen:"MainStack"})
         })
     }
 

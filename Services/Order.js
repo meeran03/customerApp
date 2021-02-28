@@ -60,3 +60,33 @@ export async function checkout(data){
       Alert.alert(e.message,JSON.stringify(e.response.data))
     })
 }
+
+export async function subscribe(data){
+    const token = await AsyncStorage.getItem('token')
+    const user = await AsyncStorage.getItem('user')
+    let userData = JSON.parse(user)
+    console.log(data)
+    let body = {
+        "customer" : 1,
+        "store" : 1,
+        "start_time" : data.startTime,
+        "end_time" : data.endTime,
+        "quantity" : data.quantity,
+        "product_id" : data.id,
+        "subscription" : data.subscription,
+        "price" : data.price,
+    }
+    console.log(body)
+    return axios.post('/subscription/',body,
+    {
+        headers : {
+            "Authorization" : `Token ${token}` 
+      }
+    }).then(res => {
+      console.log(res.data)
+      return res.data
+    }).catch(e => {
+        console.log(e.response.data)
+      Alert.alert(e.message,JSON.stringify(e.response.data))
+    })
+}

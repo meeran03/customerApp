@@ -15,6 +15,7 @@ function Header(props) {
     const handleLogout = async () => {
         await signOut().then(res => {
             console.log(res)
+            props.navigation.replace("AuthStack",{screen : "Login"})
         })
     }
         return (
@@ -31,7 +32,7 @@ function Header(props) {
                     
                     {!props.disabled && 
                         <View style={{flexDirection:"row"}}>
-                            <TouchableOpacity style={styles.backButton} onPress={() => props.navigation.navigate("Notification")} style={styles.backButton} >
+                            <TouchableOpacity style={styles.backButton} onPress={() => props.navigation.navigate("MyTabs",{screen:"Notification"})} style={styles.backButton} >
                                 <Ionicons name="notifications" size={22} color="white" />
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.backButton} onPress={handleLogout} >

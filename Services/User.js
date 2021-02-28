@@ -38,6 +38,7 @@ export async function signUser(username,password){
 export async function signOut(){
   const token = await AsyncStorage.getItem('token')
   await AsyncStorage.removeItem('token')
+  await AsyncStorage.removeItem('user')
   return axios.post('/auth/logout/',{
   },
   {
@@ -76,12 +77,14 @@ export async function updateLocation(value) {
   const user = await AsyncStorage.getItem('user')
   const token = await AsyncStorage.getItem('token')
   let userData = JSON.parse(user)
+  console.log("User data is : ",userData)
   axios
     .patch(`/user/${userData.id}/`, {
         "address" : value.address,
         "latitude" : value.latitude,
         "longitude" : value.longitude,
       },
+
       {
       headers : {
         "Authorization" : `Token ${token}`
@@ -90,5 +93,5 @@ export async function updateLocation(value) {
     .then(res => {
       console.log(res.data);
     })
-    .catch(err => console.log(err.response.data));
+    .catch(err => Alert.alert(err.message,JSON.stringify(err.response.data)));
 }

@@ -21,14 +21,15 @@ export async function getProductDetail(id) {
 
 export async function getSubscriptions() {
     const token = await AsyncStorage.getItem('token')
-    return axios.get('/subscription/',{
+    return axios.get('/subscription-type/',{
         headers : {
             "Authorization" : `Bearer ${token}`
         }
     }).then(response => {
+        console.log("This is the data",)
         return response.data
     }).catch(e => {
-        Alert.alert(e)
+        Alert.alert(e.message,JSON.stringify(e.response.data))
     })
 }
 

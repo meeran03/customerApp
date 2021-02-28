@@ -40,7 +40,8 @@ export async function getCategories() {
         headers : {
             "Authorization" : `Bearer ${token}`
         }
-    }).then(response => {
+    }).then(async response => {
+        await AsyncStorage.setItem('categories',JSON.stringify(response.data))
         return response.data
     }).catch(e => {
         Alert.alert(e)

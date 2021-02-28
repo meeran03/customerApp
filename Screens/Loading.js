@@ -8,7 +8,7 @@ export default function LoadingScreen({ navigation }) {
         checkUser().then((token) => {
             console.log(token)
         if (token) {
-          navigation.replace('MainStack',{screen :'Home'});
+          navigation.replace('MyTabs',{screen :'MainStack'});
         } else {
           navigation.replace('AuthStack',{screen : "Login"});
         }

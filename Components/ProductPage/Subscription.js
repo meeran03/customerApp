@@ -32,11 +32,11 @@ class Categories extends React.Component {
             })
         })
     }
-    handleOrder = (values) => {
+    handleSubscription = (values) => {
         values.quantity = this.props.state.quantity,
         values.item = this.props.state.detail
         values.subscriptionType2 = this.state.subscriptions.filter(item => item.id === values.subscription && item.name)[0]
-        this.props.navigation.navigate("Order Detail",{order : values})
+        this.props.navigation.navigate("Subscription Detail",{order : values})
     }
     render() {
         if (this.state.loading) {
@@ -57,7 +57,7 @@ class Categories extends React.Component {
                         timing: '',
                         subscription : 1, 
                         }}
-                        onSubmit={values => this.handleOrder(values)}
+                        onSubmit={values => this.handleSubscription(values)}
                         validationSchema={yup.object().shape({
                             startTime: yup
                             .date()

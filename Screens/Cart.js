@@ -40,7 +40,7 @@ class Cart extends React.Component {
         return(
             <View style={styles.container}> 
                 <StatusBar color="white" />
-                <Header title="My Cart"/>
+                <Header title="My Cart" navigation={this.props.navigation}/>
                 {this.state.orders.map((order,index) => {
                     return(
                     <Card order={order} index={index} navigation={this.props.navigation}/>)
