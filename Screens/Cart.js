@@ -47,7 +47,7 @@ class Cart extends React.Component {
                 })}
                 
                 <View style={styles.checkout}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate("Checkout")}>
+                    <TouchableOpacity onPress={() => this.props.navigation.replace("Checkout")}>
                         <Text style={{color:"white",fontFamily:"Raleway_bold",fontSize:22}}>Proceed to Checkout</Text>
                     </TouchableOpacity>
                 </View>

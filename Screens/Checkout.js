@@ -1,8 +1,8 @@
 import React from 'react';
-import {View,Text,Image,ActivityIndicator, StyleSheet,Dimensions} from 'react-native'
+import {View,Text,Button,ActivityIndicator, StyleSheet,Dimensions} from 'react-native'
 import {StatusBar} from 'expo-status-bar'
-import {readCart} from '../Services/Cart'
-import {checkout} from '../Services/Order'
+import {readCart,deleteCartItem} from '../Services/Cart'
+import {checkout,orderProductPush} from '../Services/Order'
 
 const {width,height} = Dimensions.get("window")
 
@@ -22,11 +22,15 @@ class Checkout extends React.Component {
         await readCart().then(async response => {
             for (var i in response) {
                 console.log(i)
-                await checkout(response[i]).then(res => {
-                    console.log(res)
+                await checkout(response[i]).then(async res => {
+                    await orderProductPush(res,response[i]).then((res) => {
+                        deleteCartItem(response[i])
+                    })
                 })
             }
+            this.setState({loading : false})
         })
+        
     }
 
     render() {
@@ -41,6 +45,7 @@ class Checkout extends React.Component {
             <View style={styles.container}> 
                 <StatusBar color="white" />
                 <View><Text>This is the checkout Page</Text></View>
+                <Button title="Go Back" onPress={() => this.props.navigation.replace("Cart")} />
             </View>
         )
     }

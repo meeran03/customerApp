@@ -38,12 +38,7 @@ export async function checkout(data){
     let body = {
         "customer" : 1,
         "store" : 1,
-        "start_time" : data.startTime,
-        "end_time" : data.endTime,
-        "buy_once" : data.subsciption >0 ? false : true,
-        "quantity" : data.quantity,
-        "product" : data.id,
-        "subscription" : data.subsciption >0 ? data.subsciption : 4,
+        "subscription" : data.subscription,
         "price" : data.price,
     }
     console.log(body)
@@ -53,13 +48,41 @@ export async function checkout(data){
             "Authorization" : `Token ${token}` 
       }
     }).then(res => {
-      console.log(res.data)
+      console.log("This is the response",res.data)
+      let order_id = res.data.id 
+      return order_id
+    }).catch(e => {
+        console.log(e.response.data)
+      Alert.alert(e.message,JSON.stringify(e.response.data))
+    })
+}
+
+export async function orderProductPush(order_id,data){
+    const token = await AsyncStorage.getItem('token')
+    const user = await AsyncStorage.getItem('user')
+    let body = {
+        "order_id" : order_id,
+        "quantity" : data.quantity,
+        "product" : data.id,
+    }
+    console.log(body)
+    return axios.post('/order-product/',body,
+    {
+        headers : {
+            "Authorization" : `Token ${token}` 
+      }
+    }).then(res => {
+      console.log("This is the response",res.data)
       return res.data
     }).catch(e => {
         console.log(e.response.data)
       Alert.alert(e.message,JSON.stringify(e.response.data))
     })
 }
+ /*         "start_time" : data.startTime,
+"end_time" : data.endTime,
+"buy_once" : data.subsciption >0 ? false : true,
+ */
 
 export async function subscribe(data){
     const token = await AsyncStorage.getItem('token')
