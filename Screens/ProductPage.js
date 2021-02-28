@@ -4,6 +4,7 @@ import {StatusBar} from 'expo-status-bar'
 import { AntDesign } from '@expo/vector-icons';
 import Subscription from '../Components/ProductPage/Subscription'
 
+
 const {width,height} = Dimensions.get("window")
 
 

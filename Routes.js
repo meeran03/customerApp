@@ -81,10 +81,8 @@ function ProfileStack() {
             headerShown : false,
           }} />
           <Stack.Screen name="OrderHistory" component={OrderHistory}  options={{
-            headerShown : false,
           }} />
           <Stack.Screen name="ChangeProfile" component={ChangeProfile}  options={{
-            headerShown : false,
           }} />
         </Stack.Navigator>
     )

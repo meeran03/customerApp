@@ -23,6 +23,7 @@ class Checkout extends React.Component {
             for (var i in response) {
                 console.log(i)
                 await checkout(response[i]).then(async res => {
+                    console.log("Thats the order info",res)
                     await orderProductPush(res,response[i]).then((res) => {
                         deleteCartItem(response[i])
                     })

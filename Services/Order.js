@@ -90,7 +90,7 @@ export async function subscribe(data){
     let userData = JSON.parse(user)
     console.log(data)
     let body = {
-        "customer" : 1,
+        "customer" : user.id,
         "store" : 1,
         "start_time" : data.startTime,
         "end_time" : data.endTime,
@@ -111,5 +111,20 @@ export async function subscribe(data){
     }).catch(e => {
         console.log(e.response.data)
       Alert.alert(e.message,JSON.stringify(e.response.data))
+    })
+}
+
+export async function getOrderHistory() {
+    const token = await AsyncStorage.getItem('token')
+    const user = await AsyncStorage.getItem('user')
+    const userData = JSON.parse(user)
+    return axios.get('/order/?customer=' + userData.id + '&status=Active' ,{
+        headers : {
+            "Authorization" : `Bearer ${token}`
+        }
+    }).then(response => {
+        return response.data
+    }).catch(e => {
+        Alert.alert(e.message,JSON.stringify(e.response.data))
     })
 }

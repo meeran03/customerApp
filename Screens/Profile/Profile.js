@@ -39,7 +39,7 @@ function Profile(props) {
                 <Text>Change Profile Information</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.tile}>
+            <TouchableOpacity onPress={() => props.navigation.navigate("OrderHistory")} style={styles.tile}>
                 <Text>See Order History</Text>
             </TouchableOpacity>
 

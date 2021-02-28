@@ -8,6 +8,8 @@ import * as yup from 'yup';
 import {Picker} from '@react-native-picker/picker';
 import { EvilIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import moment from 'moment'
+
 
 
 const {width,height} = Dimensions.get("window")
@@ -79,7 +81,7 @@ class Categories extends React.Component {
                             <TouchableOpacity onPress={() => this.setState({
                                 showStart : true
                             })} style={{flexDirection:'row'}}>
-                                <Text>{values.startTime.toISOString()}</Text>
+                                <Text>{moment(values.startTime).format('LL')}</Text>
                                 <EvilIcons name="calendar" size={24} color="black" />
                             </TouchableOpacity>
                             {this.state.showStart && 
@@ -103,7 +105,7 @@ class Categories extends React.Component {
                             <TouchableOpacity onPress={() => this.setState({
                                 showEnd : true
                             })} style={{flexDirection:'row'}}>
-                                <Text>{values.endTime.toISOString()}</Text>
+                                <Text>{moment(values.endTime).format('LL')}</Text>
                                 <EvilIcons name="calendar" size={24} color="black" />
                             </TouchableOpacity>
                             {this.state.showEnd && 
