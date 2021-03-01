@@ -18,6 +18,7 @@ import Home from './Screens/Home'
 import ProductPage from './Screens/ProductPage'
 import Order from './Screens/Order'
 import Subscribe from './Screens/Subscribe'
+import Chat from './Screens/Chat'
 // Global
 import Loading from './Screens/Loading'
 import Notification from './Screens/Notification'
@@ -141,6 +142,7 @@ function MyTabs() {
               headerShown : false,
               tabBarLabel : "Profile"
             }} />
+        <Tab.Screen name="Chat" component={Chat} />
       </Tab.Navigator>
     )}
 

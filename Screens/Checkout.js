@@ -47,6 +47,7 @@ class Checkout extends React.Component {
                 <StatusBar color="white" />
                 <View><Text>This is the checkout Page</Text></View>
                 <Button title="Go Back" onPress={() => this.props.navigation.replace("Cart")} />
+                <Button title="Chat" onPress={() => this.props.navigation.navigate("Chat")} />
             </View>
         )
     }
