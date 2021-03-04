@@ -20,15 +20,15 @@ class Checkout extends React.Component {
     }
     async componentDidMount() {
         await readCart().then(async response => {
-            for (var i in response) {
-                console.log(i)
-                await checkout(response[i]).then(async res => {
+                await checkout(response[0]).then(async res => {
                     console.log("Thats the order info",res)
-                    await orderProductPush(res,response[i]).then((res) => {
-                        deleteCartItem(response[i])
-                    })
-                })
-            }
+                    for (var i in response) {
+                        await orderProductPush(res,response[i]).then((res) => {
+                            deleteCartItem(response[i])
+                        })
+                
+                    }
+                 })
             this.setState({loading : false})
         })
         

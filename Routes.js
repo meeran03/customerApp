@@ -16,7 +16,11 @@ import ChangePassword from './Screens/Auth/ChangePassword'
 //Main Stack
 import Home from './Screens/Home'
 import ProductPage from './Screens/ProductPage'
-import Order from './Screens/Order'
+//Order Stack
+import Order from './Screens/Order/Order'
+import OrderDetail from './Screens/Order/OrderDetail'
+
+
 import Subscribe from './Screens/Subscribe'
 import Chat from './Screens/Chat'
 // Global
@@ -59,7 +63,9 @@ function MainStack() {
         <Stack.Navigator>
             <Stack.Screen name="Home" component={Home} options={{headerShown : false,}} />
             <Stack.Screen name="ProductPage" component={ProductPage} options={{headerShown : false,}} />
-            <Stack.Screen name="Order Detail" component={Order} />
+            <Stack.Screen name="Order" component={Order} />
+            <Stack.Screen name="OrderDetail" component={OrderDetail} />
+            <Stack.Screen name="Chat" component={Chat} />
             <Stack.Screen name="Subscription Detail" component={Subscribe} />
         </Stack.Navigator>
     )
@@ -142,7 +148,6 @@ function MyTabs() {
               headerShown : false,
               tabBarLabel : "Profile"
             }} />
-        <Tab.Screen name="Chat" component={Chat} />
       </Tab.Navigator>
     )}
 

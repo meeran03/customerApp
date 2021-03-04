@@ -34,14 +34,15 @@ function scrollToBottomComponent() {
 
 
 
-export default function Example() {
+export default function Example(props) {
   const [messages, setMessages] = useState([]);
 
-    let chatsocket = socket("meeran")
+    let chatsocket = socket(props.route.params.order.id)
 
   useEffect(() => {
         chatsocket.onmessage = function(e) {
           const data = JSON.parse(e.data);
+          console.log("data is ",data)
           setMessages(previousMessages => GiftedChat.append(previousMessages, data))
           console.log(messages)
         };

@@ -2,7 +2,7 @@ import React from 'react';
 import {View,Text,Image,ActivityIndicator, StyleSheet,Dimensions} from 'react-native'
 import {StatusBar} from 'expo-status-bar'
 import { AntDesign } from '@expo/vector-icons';
-import {addToCart} from '../Services/Cart'
+import {addToCart} from '../../Services/Cart'
 
 
 const {width,height} = Dimensions.get("window")

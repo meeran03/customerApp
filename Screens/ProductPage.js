@@ -48,7 +48,7 @@ class ProductPage extends React.Component {
         let data = {}
         data.quantity = this.state.quantity,
         data.item = this.state.detail
-        this.props.navigation.navigate("Order Detail",{order : data})
+        this.props.navigation.navigate("Order",{order : data})
     }
 
     render() {

@@ -25,7 +25,7 @@ function Home(props) {
             <ScrollView>
                 <Location navigation={props.navigation}/>
                 <SlideShow/>
-                <TBD/>
+                <TBD navigation={props.navigation}/>
                 <Categories/>
                 <Featured navigation={props.navigation}/>
                 <Text>I am a Homescreen</Text>

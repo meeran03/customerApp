@@ -16,6 +16,8 @@ function Login( {navigation}) {
             try {
               await AsyncStorage.setItem('token', res.token)
               await AsyncStorage.setItem('user', JSON.stringify(res.user))
+              await AsyncStorage.setItem('customer', JSON.stringify(res.customer))
+              console.log("Customer is :",res.customer)
               if (res) {
                 navigation.navigate("MyTabs", {screen : "MainStack", params : {
                 }})
