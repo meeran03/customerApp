@@ -12,7 +12,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // Auth Stack
 import Login from './Screens/Auth/Login'
 import Register from './Screens/Auth/Register'
-import ChangePassword from './Screens/Auth/ChangePassword'
 //Main Stack
 import Home from './Screens/Home'
 import ProductPage from './Screens/ProductPage'
@@ -33,7 +32,8 @@ import Checkout from './Screens/Checkout'
 import ChangeLocation from './Screens/Map/ChangeLocation'
 import Profile from './Screens/Profile/Profile'
 import OrderHistory from './Screens/Profile/OrderHistory'
-import ChangeProfile from './Screens/Profile/ChangeProfile'
+import ChangePassword from './Screens/Profile/ChangePassword'
+import Complain from './Screens/Profile/Complain'
 //Category Stack
 import Categories from './Screens/Categories/Categories'
 import CategoryDetail from './Screens/Categories/CategoryDetail'
@@ -48,7 +48,6 @@ function AuthStack() {
                 headerTitleAlign: "center"
             }} />
             <Stack.Screen name="Register" component={Register} />
-            <Stack.Screen name="ChangePassword" component={ChangePassword} />
         </Stack.Navigator>
     )
 }
@@ -84,12 +83,12 @@ function ProfileStack() {
     return (
         <Stack.Navigator>
           <Stack.Screen name="Profile" component={Profile}  options={{ headerShown : false}} />
-          <Stack.Screen name="Change Location" component={ChangeLocation}  options={{
-            headerShown : false,
-          }} />
+          <Stack.Screen name="Change Location" component={ChangeLocation} />
           <Stack.Screen name="OrderHistory" component={OrderHistory}  options={{
           }} />
-          <Stack.Screen name="ChangeProfile" component={ChangeProfile}  options={{
+          <Stack.Screen name="Complain" component={Complain}  options={{
+          }} />
+          <Stack.Screen name="ChangePassword" component={ChangePassword}  options={{
           }} />
         </Stack.Navigator>
     )

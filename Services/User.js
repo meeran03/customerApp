@@ -95,3 +95,27 @@ export async function updateLocation(value) {
     })
     .catch(err => Alert.alert(err.message,JSON.stringify(err.response.data)));
 }
+
+export async function updatePassword(value) {
+  console.log(value)
+  const user = await AsyncStorage.getItem('user')
+  const token = await AsyncStorage.getItem('token')
+  let userData = JSON.parse(user)
+  console.log("User data is : ",userData)
+  axios
+    .patch(`/changePassword/`, {
+        "old_password" : values.oldpassword,
+        "new_password" : values.password,
+        "user" : userData.id
+      },
+
+      {
+      headers : {
+        "Authorization" : `Token ${token}`
+      }
+    })
+    .then(res => {
+      console.log(res.data);
+    })
+    .catch(err => Alert.alert(err.message,JSON.stringify(err.response.data)));
+}

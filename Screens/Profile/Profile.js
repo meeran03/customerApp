@@ -31,19 +31,15 @@ function Profile(props) {
                 <Text style={styles.username}>{data.username}</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{...styles.tile,marginTop:20}}>
-                <Text>See Order History</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.tile}>
-                <Text>Change Profile Information</Text>
+            <TouchableOpacity style={{...styles.tile,marginTop:30}} onPress={() => props.navigation.navigate("ChangePassword")}>
+                <Text>Change Password</Text>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => props.navigation.navigate("OrderHistory")} style={styles.tile}>
                 <Text>See Order History</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.tile}>
+            <TouchableOpacity style={styles.tile} onPress={() => props.navigation.navigate("Complain")}>
                 <Text>Report A Complain</Text>
             </TouchableOpacity>
 
