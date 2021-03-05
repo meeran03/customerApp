@@ -1,6 +1,8 @@
 import React from 'react'
 import {View,Text,Image, ActivityIndicator, StyleSheet,Dimensions} from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import {signOut} from '../../Services/User'
+
 
 //Here we import our components
 import Header from '../../Components/Header'
@@ -19,6 +21,14 @@ function Profile(props) {
             setLoading(false)
         })()
     },[])
+
+    const handleLogout = async () => {
+        await signOut().then(res => {
+            console.log(res)
+            props.navigation.replace("AuthStack",{screen : "Login"})
+        })
+    }
+
     if (loading) {
         return <ActivityIndicator size="large" color="red" style={{flex:1,justifyContent:"center",alignItems:"center"}} />
     }
@@ -45,6 +55,10 @@ function Profile(props) {
 
             <TouchableOpacity style={styles.tile}>
                 <Text>Change Location</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.tile} onPress={handleLogout} >
+                <Text>Sign Out</Text>
             </TouchableOpacity>
 
         </View>

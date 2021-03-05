@@ -33,3 +33,15 @@ export async function getSubscriptions() {
     })
 }
 
+export async function searchProducts(value) {
+    const token = await AsyncStorage.getItem('token')
+    return axios.get('/product/?search=' + value,{
+        headers : {
+            "Authorization" : `Bearer ${token}`
+        }
+    }).then(response => {
+        return response.data
+    }).catch(e => {
+        Alert.alert(e)
+    })
+}

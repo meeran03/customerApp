@@ -35,7 +35,7 @@ function Header(props) {
                             <TouchableOpacity style={styles.backButton} onPress={() => props.navigation.navigate("MyTabs",{screen:"Notification"})} style={styles.backButton} >
                                 <Ionicons name="notifications" size={22} color="white" />
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.backButton} onPress={handleLogout} >
+                            <TouchableOpacity style={styles.backButton} onPress={() => props.navigation.navigate('MyTabs',{screen :"SearchProduct"})} >
                                 <Feather name="search" size={22} color="white" />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => props.navigation.navigate("Cart")} style={styles.backButton} >

@@ -37,6 +37,8 @@ import Complain from './Screens/Profile/Complain'
 //Category Stack
 import Categories from './Screens/Categories/Categories'
 import CategoryDetail from './Screens/Categories/CategoryDetail'
+// Search
+import SearchProduct from './Screens/SearchProduct'
 
 
 const Stack = createStackNavigator();
@@ -146,6 +148,10 @@ function MyTabs() {
           <Tab.Screen name="ProfileStack" component={ProfileStack}  options={{
               headerShown : false,
               tabBarLabel : "Profile"
+            }} />
+          <Tab.Screen name="SearchProduct" component={SearchProduct}  options={{
+              headerShown : false,
+              tabBarLabel : "Search"
             }} />
       </Tab.Navigator>
     )}
