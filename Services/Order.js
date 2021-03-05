@@ -143,6 +143,20 @@ export async function getOrderProducts(id) {
     })
 }
 
+export async function getOrderHistory() {
+    const token = await AsyncStorage.getItem('token')
+    const customer = await AsyncStorage.getItem('customer')
+    const customerData = JSON.parse(customer)
+    return axios.get('/order/?customer=' + customerData.id + '&status=DELIVERED' ,{
+        headers : {
+            "Authorization" : `Bearer ${token}`
+        }
+    }).then(response => {
+        return response.data
+    }).catch(e => {
+        Alert.alert(e.message,JSON.stringify(e.response.data))
+    })
+}
 
 export async function updateOrder(id) {
     console.log(id)
@@ -158,7 +172,8 @@ export async function updateOrder(id) {
         }
       })
       .then(res => {
-        console.log(res.data);
+          console.log("Updated data is ",res.data)
+        return (res.data);
       })
       .catch(err => Alert.alert(err.message,JSON.stringify(err.response.data)));
   }

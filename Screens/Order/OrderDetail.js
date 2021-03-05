@@ -6,7 +6,7 @@ import MapView from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import OrderTile from '../../Components/Order/Order'
+import OrderTile from '../../Components/Order/OrderTile'
 
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
@@ -50,7 +50,7 @@ class Example extends Component {
     });
   }
   componentDidMount() {  
-  let chatsocket = socketBoy(this.props.route.params.order.id)
+  let chatsocket = socketBoy(this.props.route.params.order.delivery_boy)
   console.log(this.props.route.params.order)
   chatsocket.onmessage = function(e) {
       console.log("Customer is",this.props.route.params.order.customer)
@@ -162,6 +162,7 @@ class Example extends Component {
                 duration={this.state.distance} 
                 distance={this.state.duration}
                 navigation={this.props.navigation}
+                orderTrack={true}
                 />
       </View>
       </View>

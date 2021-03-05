@@ -37,7 +37,7 @@ function scrollToBottomComponent() {
 export default function Example(props) {
   const [messages, setMessages] = useState([]);
 
-    let chatsocket = socket(props.route.params.order.id)
+    let chatsocket = socket(props.route.params.order.delivery_boy)
 
   useEffect(() => {
         chatsocket.onmessage = function(e) {

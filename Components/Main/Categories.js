@@ -44,7 +44,9 @@ class Categories extends React.Component {
                         renderItem={(item) => {
                             return(
                                 <View>
-                                    <TouchableOpacity>
+                                    <TouchableOpacity 
+                                    onPress={() => this.props.navigation.navigate("CategoryStack",
+                                    {screen: "CategoryDetail",params : {category : item.item.id,name:item.item.name}} )}>
                                         <Image source={{uri : item.item.image}} style={styles.image} />
                                         <Text style={{fontSize:12,textAlign:"center"}}>{item.item.name}</Text>
                                     </TouchableOpacity>

@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, ActivityIndicator, StyleSheet,Dimensions,Text} from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-
+import Header from '../../Components/Header'
 //Here we import our components
 import {getCategoryProducts} from '../../Services/Category'
 import ProductTile from './ProductTile'
@@ -12,7 +12,7 @@ function Categories(props) {
     const [loading,setLoading] = React.useState(true)
     React.useEffect(() => {
             (async () => {
-                await getCategoryProducts(props.category).then(async res => {
+                await getCategoryProducts(props.category!=undefined ? props.category : props.route.params.category).then(async res => {
                     console.log(res)
                     setData(res)
                     setLoading(false)

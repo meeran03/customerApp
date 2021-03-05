@@ -1,6 +1,7 @@
 import React from 'react'
 import {View,Text, ActivityIndicator, StyleSheet,Dimensions,ScrollView} from 'react-native'
 import {getOrderHistory} from '../../Services/Order'
+import OrderTile from '../../Components/Order/OrderTile'
 
 const {width,height} = Dimensions.get('window')
 
@@ -22,17 +23,10 @@ export default function OrderHistory() {
     return (
         <View style={styles.container}>
             
-            <ScrollView style={styles.orderContainer}  contentContainerStyle={{justifyContent: "center",alignItems : "center",}}>
+            <ScrollView style={styles.orderContainer}>
                 {data.map((item,index) => {
                     return(
-                        <View style={styles.order}>
-                            <View style={{flexDirection:"row",justifyContent:"space-between"}}>
-                                <Text style={{fontFamily:"Raleway",color:"grey"}}>Order No :</Text>
-                                <Text style={{fontFamily:"Raleway_bold",color:"grey"}}>{item.id}</Text>
-                            </View>
-                            <Text style={styles.orderContent}>{item.title}</Text>
-                            <Text style={styles.orderDate}>{item.message}</Text>
-                        </View>
+                        <OrderTile item={item} key={index} showTrack={false} />
                     )
                 })}
             </ScrollView>

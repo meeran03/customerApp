@@ -1,10 +1,12 @@
 import React from 'react'
 import {View, ActivityIndicator, StyleSheet,Dimensions} from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import {StatusBar} from 'expo-status-bar'
 
 //Here we import our components
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import CategoryDetail  from './CategoryDetail'
+import { ScrollView } from 'react-native-gesture-handler';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -25,7 +27,17 @@ function Categories(props) {
         return <ActivityIndicator size="large" color="red" style={{flex:1,justifyContent:"center",alignItems:"center"}} />
     }
     return (
-        <Tab.Navigator>
+        <>
+        <StatusBar backgroundColor="black" />
+        <Tab.Navigator tabBarOptions={{
+            labelStyle : {
+                fontSize : 9
+            },
+            allowFontScaling:false, 
+            tabStyle: {
+                paddingTop:30
+            }
+          }}>
             {data.map((category,index) => {
                 return(
                     <Tab.Screen key={index} name={category.name}  >
@@ -34,6 +46,7 @@ function Categories(props) {
                 )
             }) }
         </Tab.Navigator>
+        </>
     )
 }
 

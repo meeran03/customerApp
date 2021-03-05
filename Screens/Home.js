@@ -1,5 +1,5 @@
 import React from 'react'
-import {View,Text,ScrollView} from 'react-native'
+import {View,Text,ScrollView,RefreshControl} from 'react-native'
 import Header from '../Components/Header'
 
 //Here we import our components
@@ -13,20 +13,38 @@ import Location from '../Components/Main/Location'
 import {registerForPushNotificationsAsync} from '../Services/PushNotifications'
 import {updateUser} from '../Services/User'
 
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
+
 function Home(props) {
     React.useEffect(() => {
         registerForPushNotificationsAsync().then(token => {
             updateUser("push_token",token)
         })
       },[])
+      const [refreshing, setRefreshing] = React.useState(false);
+
+      const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+      }, []);
+    
     return (
         <View style={{backgroundColor:"white",flex:1}}>
             <Header title="Home" navigation={props.navigation}/>
-            <ScrollView>
+            <ScrollView
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
+            }
+            >
                 <Location navigation={props.navigation}/>
                 <SlideShow/>
                 <TBD navigation={props.navigation}/>
-                <Categories/>
+                <Categories navigation={props.navigation}/>
                 <Featured navigation={props.navigation}/>
                 <Text>I am a Homescreen</Text>
             </ScrollView>

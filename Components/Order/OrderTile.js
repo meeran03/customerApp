@@ -2,6 +2,7 @@ import React from 'react'
 import {View,Text,Alert, ActivityIndicator, StyleSheet} from 'react-native'
 import {getOrderProducts,updateOrder} from '../../Services/Order'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import moment from 'moment'
 
 
 class Orders extends React.Component {
@@ -25,6 +26,13 @@ class Orders extends React.Component {
 
   }
 
+  manageOrder =  async () => {
+    await updateOrder(this.props.item.id).then(res => {
+        console.log("Hey yoy see me",res)
+    })
+    this.props.navigation.replace("MyTabs",{screen: "MainStack"})
+
+  }
 
     render() {
         if (this.state.loading) {
@@ -43,6 +51,13 @@ class Orders extends React.Component {
                 </View>
 
                 <View style={{flexDirection:"row",paddingTop:5,justifyContent:"space-between"}}>
+                    <Text style={{fontFamily:"Raleway_medium",color:"grey"}}>Date:</Text>
+                    <Text style={{fontFamily:"Raleway_medium",color:"grey"}}>{moment(this.props.item.created_at).format('LL')}</Text>
+                </View>
+
+{ this.props.orderTrack &&
+                <>
+               <View style={{flexDirection:"row",paddingTop:5,justifyContent:"space-between"}}>
                     <Text style={{fontFamily:"Raleway_medium",color:"grey"}}>Distance Left:</Text>
                     <Text style={{fontFamily:"Raleway_medium",color:"grey"}}>{this.props.distance} kms</Text>
                 </View>
@@ -51,6 +66,8 @@ class Orders extends React.Component {
                     <Text style={{fontFamily:"Raleway_medium",color:"grey"}}>Time Left:</Text>
                     <Text style={{fontFamily:"Raleway_medium",color:"grey"}}>{this.props.duration} mins</Text>
                 </View>
+                </>
+                }
 
                 <View style={{flexDirection:"row",justifyContent:"space-between",paddingVertical:5}}>
                     <Text style={{fontSize:12,fontFamily:"Raleway_medium",color:"#e94e87"}}>ORDER PRODUCTS:</Text>
@@ -70,6 +87,7 @@ class Orders extends React.Component {
                     <Text style={{fontSize:16,fontFamily:"Raleway_medium",color:"#e94e87"}}>{this.props.item.price}</Text>
                 </View>
 
+{this.props.orderTrack   &&
                 <View style={{flexDirection:"row",justifyContent:"space-evenly",paddingVertical:10}}>
                     <TouchableOpacity style={{backgroundColor:"#e94e87",padding:8}} 
                         onPress={() => this.props.navigation.navigate("Chat",{
@@ -80,12 +98,12 @@ class Orders extends React.Component {
                     </TouchableOpacity>
 
                     <TouchableOpacity style={{backgroundColor:"#e94e87",padding:8}} 
-                        onPress={() => createTwoButtonAlert(() => updateOrder(this.props.item.id))}
+                        onPress={() => createTwoButtonAlert(() => this.manageOrder())}
                     >
                         <Text style={{color:"white"}}>Mark as Complete</Text>
                     </TouchableOpacity>
 
-                </View>
+                </View>}
 
             </View>
         )}
